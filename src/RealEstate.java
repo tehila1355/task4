@@ -27,9 +27,6 @@ public class RealEstate {
         this.addresses = addressArray;
 
     }
-    //RealEstate – המייצגת את המערכת עצמה. שדות: משתמשים, נכסים, כתובות.
-    //בנוסף, תהיה מחלקה ראשית שתהיה אחראית על הצגת התפריט הראשי, כפי שיפורט בהמשך.
-
 
     public void createUser() {
         Scanner scanner = new Scanner(System.in);
@@ -200,39 +197,38 @@ public class RealEstate {
 
     public void removeProperty(User user) {
         Scanner scanner = new Scanner(System.in);
-        int arraySize;
+
         int counter = 0;
         int propertyToRemove;
-        if (user.isEstateBroker()) {
-            arraySize = 10;
-        } else {
-            arraySize = 3;
-        }
-        int[] indexUserProperties = new int[arraySize];
+
+        Property[] newPropertyArray = new Property[this.properties.length - 1];
 
         if (user.getPosts() != 0) {
-            for (int i = 0; i < this.properties.length; i++) {
-                if (this.properties[i].getAdvertiserUser() == user) {
-                    System.out.println(counter + 1);
-                    System.out.println(this.properties[i] + "\n");
-                    indexUserProperties[counter] = i;
-                    counter++;
-                }
-            }
+            printMyProperties(user);
+
             do {
                 System.out.println("Enter the property's number you want to remove: ");
                 propertyToRemove = scanner.nextInt();
-            } while (propertyToRemove > counter + 1 && propertyToRemove < 1);
+            }while (propertyToRemove > user.getPosts());
 
-            Property[] newProperties = new Property[this.properties.length - 1];
 
-            for (int i = 0; i < indexUserProperties[propertyToRemove - 1]; i++) {
-                newProperties[i] = this.properties[i];
+            for (int i = 0; i < this.properties.length ; i++) {
+                Property currentProperty = properties[i];
+                if (currentProperty.getAdvertiserUser().equals(user)) {
+                    counter++;
+                }
+                if (counter < propertyToRemove){
+                    newPropertyArray[i] = this.properties[i];
+                }
+                if (counter > propertyToRemove) {
+                    newPropertyArray[i - 1] = this.properties[i];
+                }
+                if (counter == propertyToRemove) {
+                    counter++;
+                }
             }
-            for (int i = indexUserProperties[propertyToRemove - 1]; i < this.properties.length - 1; i++) {
-                newProperties[i] = this.properties[i + 1];
-            }
-            this.properties = newProperties;
+
+            this.properties = newPropertyArray;
             user.removePost();
             System.out.println("The property has been deleted");
 
@@ -249,9 +245,12 @@ public class RealEstate {
     }
 
     public void printMyProperties(User user) {
+        int counter = 1;
         for (int i = 0; i < this.properties.length; i++) {
             if (this.properties[i].getAdvertiserUser() == user) {
+                System.out.println(counter);
                 System.out.println(this.properties[i] + "\n");
+                counter++;
             }
         }
     }
@@ -301,7 +300,7 @@ public class RealEstate {
         } while (minPrice >= maxPrice && minPrice > 0);
 
         for (int i = 0; i < this.properties.length; i++) {
-            Property currentProperty = properties[i];
+            Property currentProperty = this.properties[i];
             if (currentProperty.isForRent()) {
                 thePropertyIsForRent = 1;
             } else {
