@@ -7,8 +7,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         RealEstate realEstate = new RealEstate();
-
-
         do {
             do {
                 System.out.println("To sign up enter 1 to Log-in enter 2 and to Exit enter 3");

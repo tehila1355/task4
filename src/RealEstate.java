@@ -224,7 +224,7 @@ public class RealEstate {
                     newPropertyArray[i - 1] = this.properties[i];
                 }
                 if (counter == propertyToRemove) {
-                    counter++;
+                   counter++;
                 }
             }
 
@@ -254,6 +254,7 @@ public class RealEstate {
             }
         }
     }
+
 
     public Property[] search() {
         Scanner scanner = new Scanner(System.in);
@@ -309,8 +310,8 @@ public class RealEstate {
             if (thePropertyIsForRent == answerRentOrSale || answerRentOrSale == -999) {
                 if (currentProperty.getRooms() == roomsNumber || roomsNumber == -999) {
                     if (currentProperty.getType() == type || type == -999) {
-                        if (currentProperty.getPrice() >= maxPrice || maxPrice == -999) {
-                            if (currentProperty.getPrice() <= minPrice || minPrice == -999) {
+                        if (currentProperty.getPrice() <= maxPrice || maxPrice == -999) {
+                            if (currentProperty.getPrice() >= minPrice || minPrice == -999) {
                                 propertiesWithFilter[counter] = currentProperty;
                                 counter++;
                             }
