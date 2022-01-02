@@ -90,6 +90,9 @@ public class RealEstate {
         Scanner scanner = new Scanner(System.in);
         String userNameToCheck;
         String passwordToCheck;
+        int user = 1;
+
+
 
 
         System.out.println("Enter your username: ");

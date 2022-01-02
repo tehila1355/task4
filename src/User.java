@@ -8,7 +8,7 @@ public class User {
 
     //שם משתמש
     //סיסמה
-    //מספר טלפון-
+    //מספר טלפון
     // האם מתווך או משתמש רגיל.
 
     public User (String userName, String password ,String phoneNumber, boolean isEstateBroker){
