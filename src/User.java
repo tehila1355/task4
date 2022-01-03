@@ -6,11 +6,6 @@ public class User {
     private boolean isEstateBroker;
     private int posts;
 
-    //שם משתמש
-    //סיסמה
-    //מספר טלפון
-    // האם מתווך או משתמש רגיל.
-
     public User (String userName, String password ,String phoneNumber, boolean isEstateBroker){
         this.userName = userName;
         this.password = password;
@@ -33,6 +28,7 @@ public class User {
     public void setUserName (String userName){
         this.userName = userName;
     }
+
     public String getPassword (){
         return this.password;
     }
@@ -57,9 +53,15 @@ public class User {
         return this.posts;
     }
 
-
     public String toString (){
-        return "user name:" + this.userName + "\n"+ "Contact: "+ this.phoneNumber;
+        String output = this.userName + " " + this.phoneNumber;
+        if (this.isEstateBroker()){
+            output += " (real estate broker).";
+        }else {
+            output += ".";
+        }
+
+        return output;
 
     }
 

@@ -1,5 +1,8 @@
 public class Property {
 
+    private static final int REGULAR_APARTMENT = 1;
+    private static final int PENTHOUSE = 2;
+    private static final int PRIVATE_HOUSE = 3;
     private Address address;
     private int rooms;
     private int price;
@@ -10,14 +13,6 @@ public class Property {
     private int floorNumber;
     private User advertiserUser;
 
-    // כתובת
-    //מספר חדרים,
-    // מחיר
-    //סוג,
-    // האם להשכרה,
-    //מספר הבית,
-    //מספר הקומה,
-    //המשתמש שפרסם את הנכס
 
     public Property (Address address, int type , int floorNumber, int rooms, int propertyNumber, boolean isForRent, int price,User advertiserUser){
         this.address = address;
@@ -63,11 +58,11 @@ public class Property {
 
     public String toString (){
         String output = "";
-                switch (this.type){
-            case 1 :
+        switch (this.type){
+            case REGULAR_APARTMENT:
                 output = "house building -regular apartment - ";
                 break;
-            case 2:
+            case PENTHOUSE:
                 output = "house building -penthouse - ";
                 break;
 
@@ -75,18 +70,13 @@ public class Property {
                 output = "Private house - ";
         }
         output += this.rentOrSale + ": " + this.rooms + " rooms";
-        if (this.type != 3){
+        if (this.type != PRIVATE_HOUSE){
             output += ", floor " + this.floorNumber + ".";
         }else {
             output += ".";
         }
         output += "\n" + "Price: " + this.price + "₪." +
-                "\n" + "Contact info: " + advertiserUser.getUserName() + " " + advertiserUser.getPhoneNumber();
-        if (advertiserUser.isEstateBroker()){
-            output += " (real estate broker).";
-        }else {
-            output += ".";
-        }
+                "\n" + "Contact info: " + advertiserUser.toString();
 
         return output;
 

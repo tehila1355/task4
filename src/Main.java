@@ -1,9 +1,25 @@
 import java.util.Scanner;
 
 public class Main {
+    final static int SIGN_UP = 1;
+    final static int LOG_IN = 2;
+    final static int EXIT = 3;
+    final static int FIRST_MENU_MAX_CHOICE = 3;
+    final static int FIRST_MENU_MIN_CHOICE = 1;
+    final static int USER_CHOICE_POST_NEW_PROPERTY = 1;
+    final static int USER_CHOICE_REMOVE_PROPERTY = 2;
+    final static int USER_CHOICE_PRINT_ALL_PROPERTIES = 3;
+    final static int USER_CHOICE_PRINT_USER_PROPERTIES = 4;
+    final static int USER_CHOICE_PRINT_SEARCH = 5;
+    final static int USER_CHOICE_EXIT = 6;
+    final static int SECOND_MENU_MAX_CHOICE = 6;
+    final static int SECOND_MENU_MIN_CHOICE = 1;
+
+
     public static void main(String[] args) {
         int userChoice1;
         int userChoice2;
+        boolean postNewProperty;
         Scanner scanner = new Scanner(System.in);
 
         RealEstate realEstate = new RealEstate();
@@ -12,12 +28,12 @@ public class Main {
                 System.out.println("To sign up enter 1 to Log-in enter 2 and to Exit enter 3");
                 userChoice1 = scanner.nextInt();
 
-            }while (userChoice1 > 3 || userChoice1 <= 0);
+            }while (userChoice1 > FIRST_MENU_MAX_CHOICE || userChoice1 < FIRST_MENU_MIN_CHOICE);
 
-            if (userChoice1 == 1) {
+            if (userChoice1 == SIGN_UP) {
                 realEstate.createUser();
 
-            }if (userChoice1 == 2){
+            }if (userChoice1 == LOG_IN){
                 User loggedUser = realEstate.userLogIn();
 
                 if (loggedUser == null) {
@@ -32,58 +48,45 @@ public class Main {
                                 "\n" + "5- Search for properties by parameters" +
                                 "\n" + "6- Disconnect and return to the main menu");
                         userChoice2 = scanner.nextInt();
-                    }while (userChoice2 > 6 || userChoice2 < 1);
+                    }while (userChoice2 > SECOND_MENU_MAX_CHOICE || userChoice2 < SECOND_MENU_MIN_CHOICE);
 
 
                     switch (userChoice2) {
-                        case 1:
-                            realEstate.postNewProperty(loggedUser);
-                            break;
-                        case 2:
-                            realEstate.removeProperty(loggedUser);
-                            break;
-                        case 3:
-                            realEstate.printAllProperties();
-                            break;
-                        case 4:
-                            realEstate.printMyProperties(loggedUser);
-                            break;
-                        case 5:
-                            Property [] printProperties = realEstate.search();
-                            for (int i = 0; i < printProperties.length; i++) {
-                                System.out.println(printProperties[i]);
+                        case USER_CHOICE_POST_NEW_PROPERTY:
+                            postNewProperty = realEstate.postNewProperty(loggedUser);
+                            if (postNewProperty) {
+                                System.out.println("the property has successfully posted!");
+                            }else {
+                                System.out.println("posting of the property failed");
                             }
                             break;
-                        case 6:
+                        case USER_CHOICE_REMOVE_PROPERTY:
+                            realEstate.removeProperty(loggedUser);
+                            break;
+                        case USER_CHOICE_PRINT_ALL_PROPERTIES:
+                            realEstate.printAllProperties();
+                            break;
+                        case USER_CHOICE_PRINT_USER_PROPERTIES:
+                            realEstate.printUserProperties(loggedUser);
+                            break;
+                        case USER_CHOICE_PRINT_SEARCH:
+                            Property [] printProperties = realEstate.search();
+                            for (int i = 0; i < printProperties.length; i++) {
+                                Property currentProperty = printProperties[i];
+                                if (currentProperty != null) {
+                                    System.out.println(currentProperty);
+                                }
+                            }
+                            break;
+                        case USER_CHOICE_EXIT:
                             break;
                     }
                 }
-
-
             }
-        }while (userChoice1 != 3);
+        }while (userChoice1 != EXIT);
     }
 
-//    1 – ליצור חשבון
-//2 – להתחבר לחשבון קיים
-//3 – לסיים את התוכנית
-
-
-//        1 – לפרסם נכס חדש
-//        2 – להסיר פרסום על נכס
-//        3 – להציג את כל הנכסים במערכת
-//        4 – להציג את כל הנכסים שפורסמו על ידי המשתמש
-//        5 – לחפש נכס לפי פרמטרים
-//        6 – להתנתק ולחזור לתפריט הראשי
-
-
-
-
-
-
 }
-
-
 
 
 
