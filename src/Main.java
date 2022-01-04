@@ -72,8 +72,7 @@ public class Main {
                         case USER_CHOICE_PRINT_SEARCH:
                             Property [] printProperties = realEstate.search();
                             for (int i = 0; i < printProperties.length; i++) {
-                                Property currentProperty = printProperties[i];
-                                    System.out.println(currentProperty);
+                                System.out.println(printProperties[i]);
                             }
                             break;
                         case USER_CHOICE_EXIT:
