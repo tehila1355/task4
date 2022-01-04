@@ -73,9 +73,7 @@ public class Main {
                             Property [] printProperties = realEstate.search();
                             for (int i = 0; i < printProperties.length; i++) {
                                 Property currentProperty = printProperties[i];
-                                if (currentProperty != null) {
                                     System.out.println(currentProperty);
-                                }
                             }
                             break;
                         case USER_CHOICE_EXIT:

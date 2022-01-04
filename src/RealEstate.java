@@ -19,7 +19,6 @@ public class RealEstate {
     private static final int MIN_ROOMS_NUMBER = 0;
 
 
-
     private User[] users;
     private Property[] properties;
     private Address[] addresses;
@@ -328,9 +327,12 @@ public class RealEstate {
                 }
 
             }
-
         }
-        return propertiesWithFilter;
+        Property[] propertiesWithFilterAndWithoutNull = new Property[counter];
+        for (int i = 0; i < counter; i++) {
+            propertiesWithFilterAndWithoutNull[i] = propertiesWithFilter[i];
+        }
+        return propertiesWithFilterAndWithoutNull;
     }
 
 
